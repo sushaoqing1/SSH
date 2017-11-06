@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	
+	
+	
+	
+	<package name="default" namespace="/" extends="struts-default">
+	<interceptors>
+	<interceptor-stack name="sshStack">
+			<interceptor-ref name="paramsPrepareParamsStack">
+				<param name="prepare.alwaysInvokePrepare">false</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack">
+              <param name="modelDriven.refreshModelBeforeResult">true</param>
+            </interceptor-ref>
+	</interceptor-stack>
+	 </interceptors>
+	<default-interceptor-ref name="sshStack"></default-interceptor-ref>
+		<action name="emp-*" class="employeeAction" method="{1}">
+			<result name="list">/emp-list.jsp</result>
+			<result name="delete" type="redirect">/emp-list</result>
+			<result name="input">/emp-input.jsp</result>
+			<result name="success" type="redirect">/emp-list</result>
+		</action>
+		<action name="login" class="userloginAction" method="login">
+
+			<result name="success" >/index.html</result>
+			<result name="false" type="redirect">/login.jsp</result>
+		</action>
+		<action name="register" class="registerAction" method="register">
+
+			<result name="success" >/register_success.jsp</result>
+			<result name="false" >/register_false.jsp</result>
+		</action>
+		
+	</package>
+	
+</struts>
